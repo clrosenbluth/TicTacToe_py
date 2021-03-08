@@ -8,6 +8,9 @@ class tttGUI:
         # Variable to hold the current symbol
         self.current_var = 'X'
 
+        # Variable to check for draw
+        self.moves = 0
+
         # Create main window
         self.main_window = tkinter.Tk()
         self.main_window.geometry("300x300")
@@ -69,6 +72,7 @@ class tttGUI:
         # Do the turn
         if self.board[x][y]["text"] == '-':
             self.board[x][y]["text"] = self.current_var
+            self.moves += 1
 
         # Check for a win
         if self.win_check():
@@ -76,6 +80,9 @@ class tttGUI:
                 self.prompt["text"] = "X: Winner!"
             else:
                 self.prompt["text"] = "O: Winner!"
+
+        if self.moves == len(self.board) * len(self.board[0]):
+            self.prompt["text"] = "Ended in a draw"
 
         # Change players
         self.toggle()
